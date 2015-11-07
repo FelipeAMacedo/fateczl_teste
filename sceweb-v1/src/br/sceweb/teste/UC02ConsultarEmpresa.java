@@ -44,9 +44,6 @@ public class UC02ConsultarEmpresa {
 	
 	@Test
 	public void CT03UC02Consultar_Empresas_Com_Sucesso() {
-		System.out.println(EmpresaDAO.listaEmpresa.size() +" "+ empresaDAO.consultaEmpresas().size());
-		System.out.println(EmpresaDAO.listaEmpresa.get(0).getCnpj());
-		System.out.println(EmpresaDAO.listaEmpresa.get(1).getCnpj());
 		assertTrue(EmpresaDAO.listaEmpresa.size() == empresaDAO.consultaEmpresas().size());
 	}
 }

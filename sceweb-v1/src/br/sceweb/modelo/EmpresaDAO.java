@@ -18,8 +18,6 @@ public class EmpresaDAO {
 	public int adiciona(Empresa empresa) {
 		PreparedStatement ps;
 		int codigoRetorno = 0;
-
-		listaEmpresa.add(empresa);
 		
 		try {
 			Connection conn = new FabricaDeConexoes().getConnection(); 
@@ -32,6 +30,8 @@ public class EmpresaDAO {
 			ps.setString(5, empresa.getTelefone());
 			codigoRetorno = ps.executeUpdate();
 			ps.close();
+			
+			listaEmpresa.add(empresa);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -45,7 +45,10 @@ public class EmpresaDAO {
 	public int exclui(String cnpj) {
 		PreparedStatement ps;
 		int codigoRetorno = 0;
+
+
 		listaEmpresa.remove(consultaEmpresas(cnpj));
+		
 		try {
 			Connection conn = new FabricaDeConexoes().getConnection(); 
 			ps = conn.prepareStatement("delete from empresa where cnpj = ?");

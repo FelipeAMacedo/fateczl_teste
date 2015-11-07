@@ -1,6 +1,7 @@
 package br.sceweb.teste;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -14,9 +15,10 @@ public class UC01CadastrarEmpresa {
 	static Controle controle;
 	static Empresa empresa;
 	static Empresa empresa2;
-
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 		controle = new Controle();
 		empresa = new Empresa();
 		empresa.setCnpj("87462111000106");
@@ -35,12 +37,9 @@ public class UC01CadastrarEmpresa {
 
 	@Test
 	public void CT01UC01FBCadastrarEmpresa_com_sucesso() {
-		//fail("Not yet implemented");
 		controle.excluirEmpresa(empresa.getCnpj());
 		String msg = controle.cadastrarEmpresa(empresa.getCnpj(), empresa.getNomeDaEmpresa(), empresa.getNomeFantasia(), empresa.getEndereco(), empresa.getTelefone());
 		assertEquals("cadastro realizado com sucesso", msg);
-		
-		
 	}
 	
 	@Test
@@ -48,8 +47,7 @@ public class UC01CadastrarEmpresa {
 		controle.cadastrarEmpresa(empresa.getCnpj(), empresa.getNomeDaEmpresa(), empresa.getNomeFantasia(), empresa.getEndereco(), empresa.getTelefone());
 		String msg = controle.cadastrarEmpresa(empresa.getCnpj(), empresa.getNomeDaEmpresa(), empresa.getNomeFantasia(), empresa.getEndereco(), empresa.getTelefone());
 		assertEquals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '" + empresa.getCnpj() + "' for key 'PRIMARY'", msg);
-		controle.excluirEmpresa(empresa.getCnpj());		
-
+		controle.excluirEmpresa(empresa.getCnpj());
 	}
 	
 	@Test
@@ -72,5 +70,6 @@ public class UC01CadastrarEmpresa {
 		} catch(Exception e) {
 			assertEquals("Nome da Empresa Inválido!", e.getMessage());
 		}
+		
 	}
 }
